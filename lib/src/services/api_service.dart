@@ -6,7 +6,11 @@ class ApiService {
   static const String _baseUrl = 'https://ru.api.dev.photograf.io/v1/jobEvaluation/images';
 
   Future<ApiResponse> fetchImages({String? continuationToken}) async {
+    if(continuationToken != null) {
+      continuationToken = Uri.encodeComponent(continuationToken);
+    }
     final uri = continuationToken != null 
+    
         ? Uri.parse('$_baseUrl?continuationToken=$continuationToken') 
         : Uri.parse(_baseUrl);
         
